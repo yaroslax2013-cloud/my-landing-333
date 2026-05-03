@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Win Story</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#0f172a;
+    color:#fff;
+}
+
+.container {
+    padding:15px;
+    max-width:600px;
+    margin:auto;
+}
+
+h1 {
+    font-size:24px;
+}
+
+.sub {
+    color:#94a3b8;
+    margin-bottom:10px;
+}
+
+img {
+    width:100%;
+    border-radius:10px;
+}
+
+.story p {
+    margin:10px 0;
+}
+
+.box {
+    background:#020617;
+    padding:12px;
+    border-radius:10px;
+    margin-top:15px;
+}
+
+.live { color:#22c55e; font-size:14px; }
+.trust { font-size:14px; color:#e2e8f0; }
+.warning { color:#f87171; font-size:14px; }
+
+#activity, #chat {
+    height:100px;
+    overflow:hidden;
+}
+
+.item {
+    font-size:13px;
+    margin-bottom:5px;
+}
+
+.button {
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:#22c55e;
+    color:#000;
+    text-align:center;
+    padding:16px;
+    font-size:18px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/* Timer */
+.timer {
+    font-size:18px;
+    color:#facc15;
+    margin-top:10px;
+}
+
+/* Counter */
+.counter {
+    font-size:16px;
+    color:#22c55e;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>I turned $3 into $247 in 15 minutes 😳</h1>
+<div class="sub">Real test. Real withdrawal.</div>
+
+<img src="win1.jpeg">
+
+<div class="counter">💰 Users won today: $<span id="money">12430</span></div>
+
+<div class="story">
+<p>I saw this game on Facebook. Thought it was fake.</p>
+<p>But comments were crazy... people winning.</p>
+<p>I tried with just $3.</p>
+<p>After a few spins — BOOM (x326).</p>
+<p>I withdrew same day. No issues.</p>
+</div>
+
+<div class="box">
+<div class="live"><b>Live activity:</b></div>
+<div id="activity"></div>
+</div>
+
+<div class="box">
+<div class="live"><b>Players chat:</b></div>
+<div id="chat"></div>
+</div>
+
+<div class="box trust">
+✔️ Licensed platform<br>
+✔️ Instant withdrawals<br>
+✔️ Mobile friendly<br>
+✔️ Works in Nigeria
+</div>
+
+<div class="warning">
+⚠️ Only new users bonus<br>
+⚠️ Limited spots available
+</div>
+
+<div class="timer">
+⏳ Bonus expires in: <span id="time">05:00</span>
+</div>
+
+</div>
+
+<a href="#" class="button">PLAY NOW</a>
+
+<script>
+// Live activity
+const activity = [
+"John from Lagos just registered",
+"Musa won $84",
+"Chinedu hit x326",
+"David withdrew $210",
+"Ibrahim won $65",
+"Samuel joined game",
+"Grace won $120"
+];
+
+// Chat messages
+const chat = [
+"Is this real?",
+"I just withdrew $90 😳",
+"It works bro",
+"Took me 10 mins",
+"Use small money first",
+"I won yesterday too"
+];
+
+function addMsg(id, list) {
+    const container = document.getElementById(id);
+    const msg = document.createElement("div");
+    msg.className = "item";
+    msg.innerText = "✔️ " + list[Math.floor(Math.random()*list.length)];
+    container.prepend(msg);
+
+    if (container.children.length > 6) {
+        container.removeChild(container.lastChild);
+    }
+}
+
+setInterval(() => addMsg("activity", activity), 2000);
+setInterval(() => addMsg("chat", chat), 2500);
+
+// Counter animation
+let money = 12430;
+setInterval(() => {
+    money += Math.floor(Math.random()*50);
+    document.getElementById("money").innerText = money;
+}, 1500);
+
+// Timer
+let time = 300;
+setInterval(() => {
+    if (time > 0) {
+        time--;
+        let min = Math.floor(time/60);
+        let sec = time % 60;
+        document.getElementById("time").innerText = 
+        `${min}:${sec < 10 ? "0"+sec : sec}`;
+    }
+}, 1000);
+
+// Soft redirect (через 12 сек)
+setTimeout(() => {
+    window.location.href = "#";
+}, 12000);
+
+</script>
+
+</body>
+</html>
